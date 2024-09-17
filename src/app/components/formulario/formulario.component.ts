@@ -55,9 +55,15 @@ export class FormularioComponent implements OnInit {
           console.log(l);
           this.libro = l;
           this.libroForm.patchValue(this.libro);
-          this.libro.autores.forEach((a) =>
-            this.crearAutor(a.apellido, a.nombre)
-          );
+          this.autores.clear();
+          this.libro.autores.forEach((a) => {
+            this.autores.push(
+              new FormGroup({
+                apellido: new FormControl(a.apellido),
+                nombre: new FormControl(a.nombre),
+              })
+            );
+          });
         },
         error: (e) => alert(e),
       });
