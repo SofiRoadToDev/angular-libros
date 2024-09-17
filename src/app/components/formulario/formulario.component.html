@@ -1,0 +1,85 @@
+<p class="fs-3 fw-3 text-center">Formulario</p>
+
+<form [formGroup]="libroForm" (ngSubmit)="handleSubmit()">
+  <label class="form-label" for="titulo">Titulo</label>
+  <input
+    type="text"
+    formControlName="titulo"
+    class="form-control"
+    id="titulo"
+    placeholder="titulo"
+  />
+  @if( ( libroForm.get('titulo')?.dirty || libroForm.get('titulo')?.touched) &&
+  libroForm.get('titulo')?.errors?.['required']){
+  <span class="text-danger"> El titulo es obligatorio </span>
+  }
+  <label for="tema">Tema</label>
+  <input
+    type="text"
+    class="form-control"
+    formControlName="tema"
+    id="tema"
+    placeholder="tema"
+  />
+  @if( ( libroForm.get('tema')?.dirty || libroForm.get('tema')?.touched) &&
+  libroForm.get('tema')?.errors?.['required']){
+  <span class="text-danger"> El titulo es obligatorio </span>
+  }
+  <label for="tema">ISBN</label>
+  <input
+    type="text"
+    class="form-control"
+    formControlName="isbn"
+    id="isbn"
+    placeholder="isbn"
+  />
+  @if( ( libroForm.get('isbn')?.dirty || libroForm.get('isbn')?.touched) &&
+  libroForm.get('isbn')?.errors?.['required']){
+  <span class="text-danger"> El ISBN es obligatorio </span>
+  }
+  <label for="tema">Editorial</label>
+  <input
+    type="text"
+    class="form-control"
+    formControlName="editorial"
+    id="editorial"
+    placeholder="editorial"
+  />
+  @if( ( libroForm.get('editorial')?.dirty ||
+  libroForm.get('editorial')?.touched) &&
+  libroForm.get('editorial')?.errors?.['required']){
+  <span class="text-danger"> La editorial es obligatoria </span>
+  }
+  <h4 class="text-center my-3">Autores</h4>
+  <div formArrayName="autores">
+    @for( autor of autores.controls; track autor; let i = $index){
+    <div [formGroupName]="i">
+      <label for="apellido{{ i }}">Apellido autor {{ i + 1 }}</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="apellido"
+        id="apellido{{ i }}"
+        placeholder="apellido"
+      />
+      <label for="nombre{{ i }}">Nombre autor {{ i + 1 }}</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nombre"
+        id="nombre{{ i }}"
+        placeholder="nombre"
+      />
+    </div>
+    <button
+      type="button"
+      class="btn btn-outline-primary my-3"
+      (click)="agregarAutor()"
+    >
+      Agregar Autor
+    </button>
+    }
+  </div>
+
+  <button type="sumbit" class="btn btn-dark w-100">Enviar</button>
+</form>

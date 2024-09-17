@@ -1,0 +1,10 @@
+.nav-link {
+  text-decoration: none;
+  margin: 1rem;
+  font-weight: bold;
+  padding: 6px;
+}
+
+.nav-link:hover {
+  box-shadow: 0px 1px 8px 2px rgb(228, 225, 225);
+}
