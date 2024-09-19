@@ -1,5 +1,14 @@
-<div class="d-flex justify-content-end py-2">  
-    <input #inputSearch class=" form-control mr-sm-2  rounded-left" type="search"  placeholder="Search" aria-label="Search">
-    <button (click)="onSearchChange(inputSearch.value)" class="btn btn-outline-success my-2 my-sm-0 text-light rounded-right " type="submit">Filtrar</button>  
+<div class="d-flex justify-content-end p-2">
+  <input
+    #inputSearch
+    type="text rounded-left"
+    placeholder="filtrar"
+    class="form-control w-25"
+  />
+  <button
+    (click)="sendQueryToParent(inputSearch.value)"
+    class="btn btn-outline-success text-light"
+  >
+    Filtrar
+  </button>
 </div>
-

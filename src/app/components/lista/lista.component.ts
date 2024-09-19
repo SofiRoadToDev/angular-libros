@@ -1,4 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { DataFetchingService } from '../../services/data-fetching.service';
 import { Libro } from '../../interfaces/Libro';
 import { RouterLink, Router } from '@angular/router';
@@ -10,12 +17,25 @@ import { RouterLink, Router } from '@angular/router';
   templateUrl: './lista.component.html',
   styleUrl: './lista.component.css',
 })
-export class ListaComponent implements OnInit {
+export class ListaComponent implements OnInit, OnChanges {
   libroService = inject(DataFetchingService);
   libros: Libro[] = [];
+  filteredLibros: Libro[] = this.libros;
   router = inject(Router);
+
+  @Input() parentQuery: string = '';
+
   ngOnInit(): void {
     this.cargarLibros();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['parentQuery']) {
+      this.filteredLibros = this.libroService.applyFilter(
+        this.libros,
+        this.parentQuery
+      );
+    }
   }
 
   borrarLibro(id: number) {

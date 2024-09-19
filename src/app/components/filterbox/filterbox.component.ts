@@ -1,19 +1,19 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-
+import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { DataFetchingService } from '../../services/data-fetching.service';
 
 @Component({
   selector: 'app-filterbox',
   standalone: true,
   imports: [],
   templateUrl: './filterbox.component.html',
-  styleUrl: './filterbox.component.css'
+  styleUrl: './filterbox.component.css',
 })
 export class FilterboxComponent {
+  @Output() query = new EventEmitter<string>();
 
-  @Output() filterWord = new EventEmitter<string>();
+  servicio = inject(DataFetchingService);
 
-  onSearchChange(value:string){
-    this.filterWord.emit(value)
+  sendQueryToParent(value: string) {
+    this.query.emit(value);
   }
-
 }
