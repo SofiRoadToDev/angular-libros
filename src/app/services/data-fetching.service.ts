@@ -28,6 +28,16 @@ export class DataFetchingService {
       .get(`${this.url}/libros`, this.options)
       .pipe(catchError(this.handleErrors));
   }
+  /**Filtrado desde el backend */
+  filterLibro(query: string): Observable<Libro[]> {
+    return this.http.get<Libro[]>(`${this.url}/filter/${query}`);
+  }
+  /**Filtrado desde el frontend */
+  applyFilter(libros: Libro[], query: string) {
+    return libros.filter((libro) =>
+      libro.titulo.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+    );
+  }
 
   getLibro(id: number): Observable<Libro> {
     return this.http.get<Libro>(`${this.url}/libros/${id}}`);

@@ -1,4 +1,11 @@
-import { Component, inject, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { DataFetchingService } from '../../services/data-fetching.service';
 import { Libro } from '../../interfaces/Libro';
 import { RouterLink, Router } from '@angular/router';
@@ -10,7 +17,7 @@ import { RouterLink, Router } from '@angular/router';
   templateUrl: './lista.component.html',
   styleUrl: './lista.component.css',
 })
-export class ListaComponent implements OnInit {
+export class ListaComponent implements OnInit, OnChanges {
   libroService = inject(DataFetchingService);
   libros: Libro[] = [];
   filteredLibros: Libro[] = this.libros;
@@ -22,12 +29,13 @@ export class ListaComponent implements OnInit {
     this.cargarLibros();
   }
 
-  applyFilter() {
-    this.filteredLibros = this.libros.filter((libro) =>
-      libro.titulo
-        .toLocaleLowerCase()
-        .includes(this.parentQuery.toLocaleLowerCase())
-    );
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['parentQuery']) {
+      this.filteredLibros = this.libroService.applyFilter(
+        this.libros,
+        this.parentQuery
+      );
+    }
   }
 
   borrarLibro(id: number) {

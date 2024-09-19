@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      @if(filteredLibros){ @for(l of libros; track l.id){
+      @if(filteredLibros.length > 0){ @for(l of filteredLibros; track l.id){
       <tr>
         <td scope="row">{{ l.titulo }}</td>
         <td>{{ l.tema }}</td>
@@ -48,9 +48,37 @@
           </div>
         </td>
       </tr>
-      } }@else {
-      <span class="text-warning">No hay libros aun</span>
-      }
+      } }@else { @for (l of libros; track l.id) {
+      <tr>
+        <td scope="row">{{ l.titulo }}</td>
+        <td>{{ l.tema }}</td>
+        <td>{{ l.editorial }}</td>
+        <td>{{ l.isbn }}</td>
+        <td>
+          {{
+            l.autores
+              ? l.autores[0].apellido + " " + l.autores[0].nombre + "..."
+              : ""
+          }}
+        </td>
+        <td>
+          <div class="btn-group">
+            <button
+              class="btn btn-outline-primary py-1"
+              [routerLink]="['/alta', l.id]"
+            >
+              Editar
+            </button>
+            <button
+              class="btn btn-outline-danger py-1"
+              (click)="borrarLibro(l.id)"
+            >
+              Borrar
+            </button>
+          </div>
+        </td>
+      </tr>
+      } }
     </tbody>
   </table>
 </div>
