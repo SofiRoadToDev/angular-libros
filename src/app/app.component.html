@@ -10,7 +10,9 @@
       <a class="nav-link text-light" routerLink="More">More</a>
     </li>
   </ul>
+  <app-filterbox (query)="getQueryFromChild($event)" />
 </nav>
+<p>Mensaje recibido del hijo: {{ inputQuery }}</p>
 <div class="d-flex justify-content-center p-3">
-  <router-outlet />
+  <app-lista [parentQuery]="inputQuery" />
 </div>

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Input } from '@angular/core';
 import { DataFetchingService } from '../../services/data-fetching.service';
 import { Libro } from '../../interfaces/Libro';
 import { RouterLink, Router } from '@angular/router';
@@ -13,9 +13,21 @@ import { RouterLink, Router } from '@angular/router';
 export class ListaComponent implements OnInit {
   libroService = inject(DataFetchingService);
   libros: Libro[] = [];
+  filteredLibros: Libro[] = this.libros;
   router = inject(Router);
+
+  @Input() parentQuery: string = '';
+
   ngOnInit(): void {
     this.cargarLibros();
+  }
+
+  applyFilter() {
+    this.filteredLibros = this.libros.filter((libro) =>
+      libro.titulo
+        .toLocaleLowerCase()
+        .includes(this.parentQuery.toLocaleLowerCase())
+    );
   }
 
   borrarLibro(id: number) {

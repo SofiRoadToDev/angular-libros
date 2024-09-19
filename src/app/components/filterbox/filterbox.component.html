@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-end p-2">
+  <input
+    #inputSearch
+    type="text rounded-left"
+    placeholder="filtrar"
+    class="form-control w-25"
+  />
+  <button
+    (click)="sendQueryToParent(inputSearch.value)"
+    class="btn btn-outline-success text-light"
+  >
+    Filtrar
+  </button>
+</div>
