@@ -65,7 +65,7 @@ export class FormularioComponent implements OnInit {
             );
           });
         },
-        error: (e) => alert(e),
+        error: (errorMsg) => alert(errorMsg),
       });
     }
   }

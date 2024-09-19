@@ -1,18 +1,22 @@
 <p class="fs-3 fw-3 text-center">Formulario</p>
 
-<form [formGroup]="libroForm" (ngSubmit)="handleSubmit()">
-  <label class="form-label" for="titulo">Titulo</label>
-  <input
-    type="text"
-    formControlName="titulo"
-    class="form-control"
-    id="titulo"
-    placeholder="titulo"
-  />
-  @if( ( libroForm.get('titulo')?.dirty || libroForm.get('titulo')?.touched) &&
-  libroForm.get('titulo')?.errors?.['required']){
-  <span class="text-danger"> El titulo es obligatorio </span>
-  }
+<form  [formGroup]="libroForm" (ngSubmit)="handleSubmit() ">
+  <div class="form-group col-md-4">
+    <label class="form-label" for="titulo">Titulo</label>
+    <input
+      type="text"
+      formControlName="titulo"
+      class="form-control"
+      id="titulo"
+      placeholder="titulo"
+    />
+    @if( ( libroForm.get('titulo')?.dirty || libroForm.get('titulo')?.touched) &&
+    libroForm.get('titulo')?.errors?.['required']){
+    <span class="text-danger"> El titulo es obligatorio </span>
+    }
+
+  </div>
+
   <label for="tema">Tema</label>
   <input
     type="text"
@@ -71,14 +75,15 @@
         placeholder="nombre"
       />
     </div>
-    <button
-      type="button"
-      class="btn btn-outline-primary my-3"
-      (click)="agregarAutor()"
-    >
-      Agregar Autor
-    </button>
+   
     }
+    <button
+    type="button"
+    class="btn btn-outline-primary my-3"
+    (click)="agregarAutor()"
+  >
+    Agregar Autor
+  </button>
   </div>
 
   <button type="sumbit" class="btn btn-dark w-100">Enviar</button>
