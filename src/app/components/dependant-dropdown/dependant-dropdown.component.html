@@ -1,0 +1,23 @@
+<div class="row-cols-9 justify-content-center ">
+
+    <form class="cols-3" [formGroup]="formulario" (ngSubmit)="handleSubmit()">
+    <select name="pais" id="pais" class="mr-3 form-select " formControlName="pais">
+        @for (c of countries; track $index) {
+            <option  [value]="c">{{c}}</option>
+        }
+       
+    </select>
+    <select name="pais" id="pais" class="form-select" formControlName="provincia">
+        @for (p of provincias; track $index) {
+            <option [value]="p">{{p}}</option>
+        }
+       
+    </select>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" formControlName="casado">
+        <label class="form-check-label" for="mySwitch">Casado</label>
+      </div>
+    <button type="submit" class="btn btn-success d-block ">Enviar</button>
+</form>
+</div>
+
